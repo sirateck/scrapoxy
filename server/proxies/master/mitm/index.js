@@ -3,13 +3,8 @@
 const
     events = require('events'),
     tls = require('tls'),
-    url = require('url'),
     {ServerResponse} = require('_http_server'),
     {parsers, freeParser} = require('_http_common');
-
-const
-    HTTPParser = process.binding('http_parser').HTTPParser;
-
 
 
 class Mitm {
@@ -64,11 +59,10 @@ class Mitm {
     }
 
 
-    _parse(socket){
+    _parse(socket) {
         const emitter = new events.EventEmitter();
 
         const parser = parsers.alloc();
-        parser.reinitialize(HTTPParser.REQUEST);
         parser.socket = socket;
         socket.parser = parser;
 
@@ -80,7 +74,7 @@ class Mitm {
 
         socket.on('data', (buffer) => {
             const ret = parser.execute(buffer);
-            if(ret instanceof Error){
+            if (ret instanceof Error) {
                 emitter.emit('error');
 
                 freeParser(socket.parser, null, socket);
@@ -92,7 +86,7 @@ class Mitm {
         });
 
         return emitter;
-    };
+    }
 }
 
 
