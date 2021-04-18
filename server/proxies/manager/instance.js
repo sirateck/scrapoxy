@@ -35,7 +35,6 @@ module.exports = class Instance extends EventEmitter {
                 winston.debug('[Instance/%s] checkAlive every %d secs', self._model.name, self._config.checkAliveDelay);
                 self._checkAliveTimeout = setInterval(() => {
                     winston.debug('[Instance/%s] checkAlive: %s / %s', self._model.name, self._alive, self._aliveCount ? self._aliveCount : '-');
-
                     pinger.ping(self._model.address)
                         .then(() => {
                             self._changeAlive(true);
