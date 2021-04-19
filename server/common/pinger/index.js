@@ -33,7 +33,7 @@ function ping(options) {
                 return reject(err);
             }
 
-            if (res.statusCode !== 200 || res.statusCode !== 400 ) { //  400 is mitmproxy GET response
+            if (res.statusCode !== 200 && res.statusCode !== 400 ) { //  400 is mitmproxy GET response
                 return reject(body);
             }
 
