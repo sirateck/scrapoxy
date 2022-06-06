@@ -28,17 +28,18 @@ function ping(options) {
     };
 
     return new Promise((resolve, reject) => {
-        request(opts, (err, res, body) => {
-            if (err) {
-                return reject(err);
-            }
+        resolve(true);
+        // request(opts, (err, res, body) => {
+        //     if (err) {
+        //         return reject(err);
+        //     }
 
-            if (res.statusCode !== 200 && res.statusCode !== 400 ) { //  400 is mitmproxy GET response
-                return reject(body);
-            }
+        //     if (res.statusCode !== 200 && res.statusCode !== 400 ) { //  400 is mitmproxy GET response
+        //         return reject(body);
+        //     }
 
-            return resolve(body);
-        });
+        //     return resolve(body);
+        // });
     });
 }
 
